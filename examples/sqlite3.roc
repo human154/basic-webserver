@@ -24,7 +24,7 @@ main = \_ ->
     body =
         rows
         |> List.map \{ id, task } ->
-            "row $(Num.toStr id), task: $(task)"
+            "row $(Num.toStr id), task: $(task)\n"
         |> Str.joinWith "\n"
     # Print out the results
     Stdout.line! body
@@ -43,7 +43,7 @@ queryTodosByStatus = \dbPath, status ->
     }
     SQLite3.execute!
         stmt
-        { SQLite3.map2 <-
+        { SQLite3.decodeRecord <-
             id: SQLite3.i64 "id",
             task: SQLite3.str "task",
         }
