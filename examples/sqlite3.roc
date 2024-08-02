@@ -35,13 +35,12 @@ main = \_ ->
     }
 
 queryTodosByStatus = \dbPath, status ->
-    stmt = SQLite3.prepareAndBind! {
-        path: dbPath,
-        query: "SELECT id, task FROM todos WHERE status = :status;",
-        bindings: [{ name: ":status", value: String status }],
-    }
     SQLite3.query!
-        stmt
+        {
+            path: dbPath,
+            query: "SELECT id, task FROM todos WHERE status = :status;",
+            bindings: [{ name: ":status", value: String status }],
+        }
         { SQLite3.decodeRecord <-
             id: SQLite3.i64 "id",
             task: SQLite3.str "task",
