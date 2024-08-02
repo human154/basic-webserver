@@ -24,8 +24,8 @@ main = \_ ->
     body =
         rows
         |> List.map \{ id, task } ->
-            "row $(Num.toStr id), task: $(task)\n"
-        |> Str.joinWith "\n"
+            "row $(Num.toStr id), task: $(task)"
+        |> Str.joinWith "<br/>"
     # Print out the results
     Stdout.line! body
 
